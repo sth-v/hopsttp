@@ -27,7 +27,7 @@ main_url = f'http://localhost:{configs.main.port}/'
         hs.HopsString("out", "out", "outputs", access=hs.HopsParamAccess.ITEM),
     ],
 )
-def req_get(run, name):
+async def req_get(run, name):
     if run:
         r = requests.get(main_url + name, verify=False)
         return r.json()
@@ -47,7 +47,7 @@ def req_get(run, name):
         hs.HopsString("out", "out", "outputs"),
     ],
 )
-def req_post(run, name, data):
+async def req_post(run, name, data):
     if run:
         r = requests.post(main_url + name, data, verify=False)
         return json.dumps(r.json())
@@ -66,7 +66,7 @@ def req_post(run, name, data):
         hs.HopsString("out", "out", "outputs"),
     ],
 )
-def req_put(run, name, data):
+async def req_put(run, name, data):
     if run:
         r = requests.put(main_url + name, data, verify=False)
         return json.dumps(r.json())
@@ -87,7 +87,7 @@ def req_put(run, name, data):
         hs.HopsString("id", "id", "site id"),
     ],
 )
-def create_site(run, name):
+async def create_site(run, name):
     if run:
         r = requests.get(main_url + 'osm/site/' + name, verify=False)
         return r.json()
@@ -106,7 +106,7 @@ def create_site(run, name):
         hs.HopsString("sites", "sites", "saved sites"),
     ],
 )
-def slist(run):
+async def slist(run):
     if run:
         r = requests.get(main_url + 'osm/site_list/' ,verify=False)
         return r.json()
@@ -128,7 +128,7 @@ def slist(run):
         hs.HopsString("out", "out", "outputs", access=hs.HopsParamAccess.ITEM),
     ],
 )
-def req_get_attr(run, id, attr):
+async def req_get_attr(run, id, attr):
     if run:
         r = requests.get(main_url + f"osm/site/{id}/{attr}", verify=False)
         return r.json()
@@ -150,7 +150,7 @@ def req_get_attr(run, id, attr):
         hs.HopsString("out", "out", "outputs", access=hs.HopsParamAccess.ITEM),
     ],
 )
-def req_post_met(run, id, name, data):
+async def req_post_met(run, id, name, data):
     if run:
 
 
