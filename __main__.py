@@ -1,5 +1,5 @@
 from flask import Flask
-import ghhops_server as hs
+import pyhops as hs
 import requests
 import json
 import urllib3
