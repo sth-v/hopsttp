@@ -6,8 +6,8 @@ import json
 import urllib3
 import argparse
 
-main_port = os.environ()["TARGET_PORT"]
-main_host = os.environ()["TARGET_HOST"]
+main_port = os.environ["TARGET_PORT"]
+main_host = os.environ["TARGET_HOST"]
 main_url = f'{main_host}:{main_port}/'
 
 import ast
@@ -28,8 +28,9 @@ hops = hs.Hops(app)
         hs.HopsString("out", "out", "outputs", access=hs.HopsParamAccess.ITEM),
     ],
 )
-async def req_get(run, name):
+def req_get(run, name):
     if run:
+        print(main_url+name)
         r = requests.get(main_url + name, verify=False)
         return r.json()
 
@@ -47,7 +48,7 @@ async def req_get(run, name):
         hs.HopsString("out", "out", "outputs"),
     ],
 )
-async def req_post(run, name, data):
+def req_post(run, name, data):
     if run:
         r = requests.post(main_url + name, data, verify=False)
         return json.dumps(r.json())
@@ -66,14 +67,14 @@ async def req_post(run, name, data):
         hs.HopsString("out", "out", "outputs"),
     ],
 )
-async def req_put(run, name, data):
+def req_put(run, name, data):
     if run:
         r = requests.put(main_url + name, data, verify=False)
         return json.dumps(r.json())
 
 
 if __name__=="__main__":
-    app.run(host=os.environ("HOPS_HOST"),
-            port=os.environ("HOPS_PORT"),
+    app.run(host=os.environ["HOPS_HOST"],
+            port=int(os.environ["HOPS_PORT"]),
             debug=True
         )
