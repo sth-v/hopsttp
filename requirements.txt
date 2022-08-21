@@ -1,1 +1,4 @@
-
+cmake
+ghhops_server
+flask
+requests
